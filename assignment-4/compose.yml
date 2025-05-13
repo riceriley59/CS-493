@@ -1,0 +1,80 @@
+services:
+  mongodb:
+    image: "mongo"
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 1s
+    environment:
+      MONGO_INITDB_DATABASE: "yelp"
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_ROOT_PASSWORD: "hunter2"
+      MONGO_USER: "sa-yelp"
+      MONGO_PASSWORD: "hunter2"
+      MONGO_DB: "yelp"
+    volumes:
+      - ${PWD}/init:/docker-entrypoint-initdb.d
+
+  rabbit:
+    image: "rabbitmq:3-management"
+    restart: always
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 1s
+    ports:
+      - "15672:15672"
+
+  api:
+    build:
+      context: ./
+    restart: on-failure
+    volumes:
+      - thumbnails:/usr/src/app/thumbnails
+      - uploads:/usr/src/app/uploads
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      rabbit:
+        condition: service_healthy
+    environment:
+      PORT: 8000
+      MONGO_HOST: "mongodb"
+      MONGO_DB: "yelp"
+      MONGO_USER: "sa-yelp"
+      MONGO_PASSWORD: "hunter2"
+      RABBITMQ_HOST: "rabbit"
+    ports:
+      - "8000:8000"
+
+  consumer:
+    build:
+      context: ./ 
+    deploy:
+      mode: replicated
+      replicas: 2
+    command: npm run startConsumer
+    restart: on-failure
+    volumes:
+      - thumbnails:/usr/src/app/thumbnails
+      - uploads:/usr/src/app/uploads
+    depends_on: 
+      mongodb:
+        condition: service_healthy
+      rabbit:
+        condition: service_healthy
+    environment:
+      MONGO_HOST: "mongodb"
+      MONGO_DB: "yelp"
+      MONGO_USER: "sa-yelp"
+      MONGO_PASSWORD: "hunter2"
+      RABBITMQ_HOST: "rabbit"
+
+volumes:
+  uploads:
+  thumbnails:

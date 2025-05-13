@@ -1,0 +1,29 @@
+services:
+  db:
+    image: "mysql"
+    restart: always
+    environment:
+      MYSQL_DATABASE: "yelp-api" 
+      MYSQL_USER: "sa-yelp-api"
+      MYSQL_PASSWORD: "testing"
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+
+  redis:
+    image: "redis"
+
+  api:
+    build: 
+      context: ./
+    restart: on-failure
+    depends_on:
+      - db
+    environment:
+      PORT: 8000
+      MYSQL_DATABASE: "yelp-api"
+      MYSQL_HOST: "db"
+      MYSQL_USER: "sa-yelp-api"
+      MYSQL_PASSWORD: "testing"
+      JWT_KEY: "create-some-jwts"
+      REDIS_HOST: "redis"
+    ports: 
+      - "8000:8000"

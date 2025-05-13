@@ -1,0 +1,26 @@
+services:
+  db:
+    image: "mysql"
+    restart: always
+    environment:
+      MYSQL_DATABASE: "yelp-api" 
+      MYSQL_USER: "sa-yelp-api"
+      MYSQL_PASSWORD: "testing"
+      MYSQL_ROOT_PASSWORD: "testing"
+    volumes:
+      - "/Users/riceriley59/Scripts/CS-493/assignment-2/tests:/docker-entrypoint-initdb.d"
+
+  api:
+    build: 
+      context: ./
+    restart: on-failure
+    depends_on:
+      - db
+    environment:
+      PORT: 8000
+      MYSQL_DB: "yelp-api"
+      MYSQL_HOST: "db"
+      MYSQL_USER: "sa-yelp-api"
+      MYSQL_PASSWORD: "testing"
+    ports: 
+      - "8000:8000"

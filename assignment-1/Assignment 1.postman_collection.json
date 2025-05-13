@@ -1,0 +1,472 @@
+{
+	"info": {
+		"_postman_id": "520d77ca-819f-4078-80b6-8fa6a50367f0",
+		"name": "Assignment 1",
+		"description": "This collection is a part of the test suites for assignment 1 in my CS493 class which is focused on API development.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22503598"
+	},
+	"item": [
+		{
+			"name": "Business Endpoints",
+			"item": [
+				{
+					"name": "Get Businesses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/businesses?page=2",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"businesses"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "10000",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Business Detailed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/businesses/:id",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"businesses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Business Details",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"ownerid\": 15,\r\n    \"name\": \"Testing Name Change\",\r\n    \"address\": \"344 SW 2nd St.\",\r\n    \"city\": \"Corvallis\",\r\n    \"state\": \"OR\",\r\n    \"zip\": \"97333\",\r\n    \"phone\": \"541-752-5952\",\r\n    \"category\": \"Shopping\",\r\n    \"subcategory\": \"Bicycle Shop\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{port}}/businesses/:id",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"businesses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Business",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ownerid\": 0,\r\n    \"name\": \"Testing Addition\",\r\n    \"address\": \"300 SW Jefferson Ave.\",\r\n    \"city\": \"Corvallis\",\r\n    \"state\": \"OR\",\r\n    \"zip\": \"97333\",\r\n    \"phone\": \"541-758-2077\",\r\n    \"category\": \"Restaurant\",\r\n    \"subcategory\": \"Brewpub\",\r\n    \"website\": \"http://block15.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{port}}/businesses",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"businesses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Business",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/businesses/:id",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"businesses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "19"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All requests for business endpoints. They follow the /businesses."
+		},
+		{
+			"name": "Photos Endpoints",
+			"item": [
+				{
+					"name": "Get All Photos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/photos",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Photo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\": 32,\r\n    \"businessid\": 5,\r\n    \"caption\": \"Testing Change.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{port}}/photos/:id",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"photos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\": 25,\r\n    \"businessid\": 1,\r\n    \"caption\": \"Added new photo.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{port}}/photos",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/photos/:id",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"photos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews Endpoints",
+			"item": [
+				{
+					"name": "Get All Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/reviews",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Review",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\": 5,\r\n    \"businessid\": 32,\r\n    \"dollars\": 1,\r\n    \"stars\": 5,\r\n    \"review\": \"Testing Change\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{port}}/reviews/:id",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"reviews",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\": 21,\r\n    \"businessid\": 1,\r\n    \"dollars\": 1,\r\n    \"stars\": 5,\r\n    \"review\": \"A Corvallis gem.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{port}}/reviews",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/reviews/:id",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"reviews",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users Endpoints",
+			"item": [
+				{
+					"name": "Get User Businesses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/user/businesses/:userId?page=1&limit=10",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"user",
+								"businesses",
+								":userId"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/user/reviews/:userId?page=1&limit=10",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"user",
+								"reviews",
+								":userId"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "26"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Photos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{port}}/user/photos/:userId?page=1&limit=10",
+							"host": [
+								"{{base_url}}{{port}}"
+							],
+							"path": [
+								"user",
+								"photos",
+								":userId"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "26"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
